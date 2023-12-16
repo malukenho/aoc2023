@@ -15,58 +15,32 @@ using int64 = long long;
  * Blog Posts: https://malukenho.github.io/post/2023/12/01/advent-of-code-2023.html
  */
 class Solution_08 {
+private:
+    string instructions;
+    vector<string> starting_points;
+    map<string, pair<string, string>> M;
+
 public:
-    static int64 part1(const vector<string> &lines) {
-        string instructions = lines[0];
+    Solution_08(const vector<string> &lines) {
+        instructions = lines[0];
 
-        map<string, pair<string, string>> M;
-
-        int num_of_paths = 0;
         for (int i = 2; i < lines.size(); ++i) {
             string key = lines[i].substr(0, 3);
 
-            if (key[2] == 'A') num_of_paths++;
+            if (key[2] == 'Z') starting_points.push_back(key);
             M[key] = {lines[i].substr(7, 3), lines[i].substr(12, 3)};
         }
-
-        int64 ans = 0;
-
-        const string NEEDLE = "ZZZ";
-        string haystack = "AAA";
-
-        while (haystack != NEEDLE) {
-            for (const char &c: instructions) {
-                if (c == 'R') haystack = M[haystack].second;
-                else haystack = M[haystack].first;
-                ans++;
-            }
-
-            if (haystack == NEEDLE) {
-                break;
-            }
-        }
-
-        return ans;
     }
 
-    static int64 part2(const vector<string> &lines) {
-        string instructions = lines[0];
+    int64 part1() { return cycle({"AAA"}); }
 
-        map<string, pair<string, string>> M;
+    int64 part2() { return cycle(starting_points); }
 
-        vector<string> ans;
-        for (int i = 2; i < lines.size(); ++i) {
-            string key = lines[i].substr(0, 3);
-
-            if (key[2] == 'A') ans.push_back(key);
-            M[key] = {lines[i].substr(7, 3), lines[i].substr(12, 3)};
-        }
-
+    int64 cycle(const vector<string>& points) {
         int64 steps = 0;
 
         vector<int64> step_counts;
-
-        for (const auto &k: ans) {
+        for (const auto &k: points) {
             string current = k;
             while (true) {
                 for (const char &c: instructions) {
