@@ -21,7 +21,7 @@ struct Galaxy {
  */
 class Solution_11 {
 public:
-    static int64 part1(vector<string> grid) {
+    static int64 solve(vector<string> grid, int times) {
         vector<bool> rowIsEmpty(grid.size(), true);
         vector<bool> colIsEmpty(grid[0].size(), true);
 
@@ -45,7 +45,7 @@ public:
                 const auto& ga = galaxies[aIdx];
                 const auto& gb = galaxies[bIdx];
 
-                int dist = getDist(ga, gb, rowIsEmpty, colIsEmpty);
+                int dist = getDist(ga, gb, rowIsEmpty, colIsEmpty, times);
 
                 ans += dist;
             }
@@ -54,21 +54,23 @@ public:
         return ans;
     }
 
+private:
     static int getDist(
             const Galaxy &ga,
             const Galaxy &gb,
             const vector<bool> &rowIsEmpty,
-            const vector<bool> &colIsEmpty
+            const vector<bool> &colIsEmpty,
+            const int times
     ) {
         int dr = abs(ga.row - gb.row);
         int dc = abs(ga.col - gb.col);
 
         int dist = dr + dc;
         for (int i = min(ga.row, gb.row) + 1; i < max(gb.row, gb.row); i++) {
-            dist += rowIsEmpty[i];
+            dist += times * rowIsEmpty[i];
         }
         for (int j = min(ga.col, gb.col) + 1; j < max(ga.col, gb.col); j++) {
-            dist += colIsEmpty[j];
+            dist += times * colIsEmpty[j];
         }
         return dist;
     }
