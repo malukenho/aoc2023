@@ -3,6 +3,8 @@
 #include <fstream>
 #include <set>
 
+#define UTILS_INCLUDED 1
+
 class Utils {
 public:
     // TODO: Make it a template
@@ -61,5 +63,21 @@ public:
 
     static bool is_digit(char c) {
         return c >= '0' && c <= '9';
+    }
+
+    static std::vector<long long> parse_v_numbers(std::string text) {
+        std::vector<long long> S;
+
+        text += ' ';
+        std::string n;
+        for (char &c: text) {
+            if (c == ' ') {
+                if (!n.empty()) S.push_back(stoll(n));
+                n = "";
+                continue;
+            }
+            n += c;
+        }
+        return S;
     }
 };
