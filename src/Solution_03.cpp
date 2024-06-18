@@ -4,6 +4,11 @@
 #include <set>
 #include <tuple>
 
+#ifndef UTILS_INCLUDED
+#include "utils.cpp"
+#endif
+
+
 using namespace std;
 
 /**

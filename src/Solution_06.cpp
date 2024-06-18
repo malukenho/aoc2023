@@ -2,6 +2,10 @@
 #include <string>
 #include <vector>
 
+#ifndef UTILS_INCLUDED
+#include "utils.cpp"
+#endif
+
 using namespace std;
 
 using int64 = long long;

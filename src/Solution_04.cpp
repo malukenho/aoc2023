@@ -4,6 +4,10 @@
 #include <set>
 #include <map>
 
+#ifndef UTILS_INCLUDED
+#include "utils.cpp"
+#endif
+
 using namespace std;
 
 /**

@@ -3,6 +3,11 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <numeric>
+
+#ifndef UTILS_INCLUDED
+#include "utils.cpp"
+#endif
 
 using namespace std;
 

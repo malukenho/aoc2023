@@ -2,6 +2,10 @@
 #include <string>
 #include <numeric>
 
+#ifndef UTILS_INCLUDED
+    #include "utils.cpp"
+#endif
+
 using namespace std;
 
 /**
